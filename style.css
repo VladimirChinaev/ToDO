@@ -59,6 +59,7 @@
 .inElement {
     display: flex;
     align-items: baseline;
+    column-gap: 5px;
 }
 
 /* содержимое элемента */
