@@ -1,0 +1,116 @@
+/* главный слот, содержит в себе инпут */
+.mainInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* сам инпут */
+.input {
+    color: black;
+    background-color: blanchedalmond;
+}
+
+/* главная панель */  
+.mainInterface {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* сторонная панель */
+.saideInterface {
+    margin-left: 15px;
+    display: flex;
+    align-items: baseline;
+}
+
+/* заголовок */
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+/* список ToDO */
+.todoList {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ToDO */
+.todoElement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    padding: 12px;
+    margin-bottom: 3px;
+    margin-top: 5px;
+    border: 2px solid rgb(2, 25, 68);
+    color: black;
+    background-color: blanchedalmond;
+}
+
+/* внутри элемента */
+.inElement {
+    display: flex;
+    align-items: baseline;
+}
+
+/* содержимое элемента */
+.text {
+    display: flex;
+    justify-content:space-between;
+}
+
+/* стрелки для сортировки */
+.arrows {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    color: black;
+    background-color: blanchedalmond;
+}
+
+/* основные кнопки */
+.buttons {
+    border-radius: 2px;
+    color: black;
+    background-color: blanchedalmond;
+}
+
+/* кнопка выполнить */
+.buttonComplete {
+    background-color: greenyellow;
+    color: black;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+/* кнопка удалить */
+.buttonDelete {
+    background-color: #ff0066;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+/* главный выбор страниц */
+.mainSelect {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+/* сами страницы */
+.select {
+    margin-top: 10px;
+    border-radius: 2px;
+    color: black;
+    background-color: blanchedalmond;
+    width: 30px;
+    height: 25px;
+}
