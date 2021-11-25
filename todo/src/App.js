@@ -1,7 +1,12 @@
 import './App.css';
-import TodoList from './TodoList';
+import TodoList from './TodoList/TodoList';
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import SortDate from './mainInterface/SortDate';
+import Title from './Title/Title';
+import FilterStatus from './mainInterface/filterStatus';
+import Input from './input/Input';
+import Pagination from './pagination/Pagination';
 
 
 
@@ -50,7 +55,18 @@ const App = () => {
 
   return (
     <div>
-      <TodoList todos={todos} setTodos={setTodos} text={text} setText={setText} handleChangeTodos={handleChangeTodos} filtered={filtered} todoFilter={todoFilter} changeStatus={changeStatus} />
+      <Title />
+      <div className="mainInput">
+        <Input text={text} setText={setText} handleChangeTodos={handleChangeTodos} />
+      </div>
+      <div className="mainInterface">
+        <FilterStatus todoFilter={todoFilter} />
+        <SortDate date={date} />
+      </div>
+      <div className="todoList">
+        <TodoList todos={todos} setTodos={setTodos} text={text} setText={setText} handleChangeTodos={handleChangeTodos} filtered={filtered} todoFilter={todoFilter} changeStatus={changeStatus} />
+      </div>
+      <Pagination />
     </div>
   );
 }

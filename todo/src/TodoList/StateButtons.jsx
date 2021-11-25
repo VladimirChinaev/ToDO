@@ -1,4 +1,4 @@
-import "./style.css"
+import "../css/style.css"
 import { useState } from "react";
 
 const StateButton = (props) => {
