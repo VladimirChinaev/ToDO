@@ -13,7 +13,7 @@ import Pagination from './pagination/Pagination';
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState("");
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("Undone");
   const [filtered, setFiltered] = useState(todos);
 
   useEffect(() => {
@@ -26,11 +26,11 @@ const App = () => {
     setFiltered(filteredTodos);
   }, [todos, filter])
 
-  const handleChangeTodos = (e) => {
+  const handleChangeTodos = (e, name) => {
     e.preventDefault();
-    const cash = todos;
-    cash.push({ id: uuidv4(), title: text, date: date(), status: "Undone" });
-    setTodos(cash);
+    console.log(e);
+    const item = { id: uuidv4(), title: name, date: date(), status: "Undone" }
+    setTodos([...todos, item]);
     setText("");
   }
 
@@ -53,6 +53,7 @@ const App = () => {
   }
 
 
+
   return (
     <div>
       <Title />
@@ -64,7 +65,7 @@ const App = () => {
         <SortDate date={date} />
       </div>
       <div className="todoList">
-        <TodoList todos={todos} setTodos={setTodos} text={text} setText={setText} handleChangeTodos={handleChangeTodos} filtered={filtered} todoFilter={todoFilter} changeStatus={changeStatus} />
+        <TodoList todos={todos} setTodos={setTodos} text={text} setText={setText} handleChangeTodos={handleChangeTodos} filtered={filtered} todoFilter={todoFilter} changeStatus={changeStatus} setFiltered={setFiltered} />
       </div>
       <Pagination />
     </div>

@@ -1,12 +1,33 @@
 import "../css/style.css"
 import { useState } from "react";
 
-const StateButton = (props) => {
 
-    const [status, setStatus] = useState(props.todo.status)
+const StateButton = ({ todo, setTodos, filtered, changeStatus }) => {
+    const [currentTitle, setCurrentTitle] = useState(todo.title);
+    const [status, setStatus] = useState('')
+    console.log(todo);
+
+    const editItem = (e, currentTitle, id) => {
+        console.log(e);
+        const item = filtered.find(el => el.id === id);
+
+        const itemIndex = filtered.findIndex(el => el.id === id);
+        if (e.keyCode === 13) {
+            console.log('hello');
+            item.title = currentTitle
+            const arr = filtered
+            arr[itemIndex] = item
+            setTodos(arr);
+        }
+        if (e.keyCode === 27) {
+            e.target.blur();
+            setCurrentTitle(todo.title)
+        }
+
+    }
 
     const removeItem = (id) => {
-        props.setTodos((prevState) =>
+        setTodos((prevState) =>
             prevState.filter((props) => {
                 return props.id !== id;
             })
@@ -14,27 +35,28 @@ const StateButton = (props) => {
     };
 
     return (
-        <div key={props.todo.id}>
+        <div key={todo.id}>
             <div className="todoElement">
                 <div className="inElement">
                     <input type="checkbox" className="buttonComplete" checked={status === "Done" ? true : false} onChange={() => {
                         let newStatus
-                        if (props.todo.status === "Done") {
+                        if (todo.status === "Done") {
                             newStatus = "Undone";
                         } else {
                             newStatus = "Done"
                         }
                         setStatus(newStatus);
-                        props.changeStatus(newStatus, props.todo.id)
+                        changeStatus(newStatus, todo.id)
                     }} />
                     <div>
-                        {props.todo.title}
+                        <input value={currentTitle} onKeyDown={(e) => editItem(e, currentTitle, todo.id)} onChange={(e) => setCurrentTitle(e.target.value)}
+                        />
                     </div>
                 </div>
                 <div className="inElement">
-                    <div>{props.todo.date}</div>
+                    <div>{todo.date}</div>
                     <input type="button" value="🗑" className="buttonDelete" onClick={() => {
-                        removeItem(props.todo.id);
+                        removeItem(todo.id);
                     }} />
                 </div>
             </div>

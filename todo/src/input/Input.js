@@ -1,16 +1,20 @@
+import { useState } from "react";
 const Input = (props) => {
-    const handleChange = (e) => {
-        props.setText(e.target.value);
-    };
+    const [inputText, setinputText] = useState('')
+    const handleCreate = (e, name) => {
+        console.log(123, name);
+        props.handleChangeTodos(e, name)
+        setinputText('')
+    }
     return (
-        <form onSubmit={props.handleChangeTodos}>
+        <form onSubmit={(e) => handleCreate(e, inputText)}>
             <div className="mainInput">
                 <input
                     type="text"
                     required
                     placeholder="I want to..."
-                    value={props.text}
-                    onChange={handleChange}
+                    value={inputText}
+                    onChange={(e) => setinputText(e.target.value)}
                     className="input"
                 ></input>
             </div>

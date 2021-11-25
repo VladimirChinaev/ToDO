@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const TodoList = (props) => {
-    let taskElements = props.filtered.map(e => <StateButtons removeItem={props.removeItem} setTodos={props.setTodos} todos={props.todos} setText={props.setText} text={props.text} changeStatus={props.changeStatus} todo={e} />)
+
+    let taskElements = props.filtered.map(e => <StateButtons removeItem={props.removeItem} setTodos={props.setTodos} todos={props.todos} setText={props.setText} text={props.text} changeStatus={props.changeStatus} todo={e} filtered={props.filtered} />)
     return (
         <div className="todoList">
             {taskElements.map((task) => {
