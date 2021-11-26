@@ -1,3 +1,11 @@
+body {
+    height: 1000px;
+    background: linear-gradient(to top, #0372b3f6 5%, #01000a 90%);
+    color: #8691a3fb;
+}
+
+
+
 /* главный слот, содержит в себе инпут */
 .mainInput {
     display: flex;
@@ -8,8 +16,12 @@
 
 /* сам инпут */
 .input {
-    color: black;
-    background-color: blanchedalmond;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 7px;
 }
 
 /* главная панель */  
@@ -50,9 +62,12 @@
     padding: 12px;
     margin-bottom: 3px;
     margin-top: 5px;
+    color: rgb(0, 204, 255);
+    background-color: black;
     border: 2px solid rgb(2, 25, 68);
-    color: black;
-    background-color: blanchedalmond;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 7px;
 }
 
 /* внутри элемента */
@@ -73,15 +88,39 @@
     width: 30px;
     height: 20px;
     cursor: pointer;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+}
+
+
+.arrows:focus {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
     color: black;
-    background-color: blanchedalmond;
+    background-color: greenyellow;
 }
 
 /* основные кнопки */
 .buttons {
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.buttons:focus {
     border-radius: 2px;
     color: black;
-    background-color: blanchedalmond;
+    background-color: greenyellow;
+    cursor: pointer;
 }
 
 /* кнопка выполнить */
@@ -90,13 +129,15 @@
     color: black;
     font-size: 15px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 /* кнопка удалить */
 .buttonDelete {
-    background-color: #ff0066;
+    background-color: crimson;
     font-size: 15px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 /* главный выбор страниц */
@@ -109,9 +150,43 @@
 /* сами страницы */
 .select {
     margin-top: 10px;
-    border-radius: 2px;
-    color: black;
-    background-color: blanchedalmond;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
     width: 30px;
     height: 25px;
+}
+
+.select:focus {
+    margin-top: 10px;
+    border-radius: 2px;
+    color: black;
+    background-color: greenyellow;
+    width: 30px;
+    height: 25px;
+}
+
+.selectArrow {
+    margin-top: 10px;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+    width: 30px;
+    height: 25px;
+}
+
+
+.sideInput {
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
 }

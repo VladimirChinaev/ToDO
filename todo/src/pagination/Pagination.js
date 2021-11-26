@@ -1,13 +1,23 @@
-const Pagination = () => {
+import React from 'react';
+
+const Pagination = ({ todosPerPage, totalTodos, paginate }) => {
+    const pageNumbers = [];
+    for (let i = 1; i <= (Math.ceil(totalTodos / todosPerPage)); i++) {
+        pageNumbers.push(i);
+    }
     return (
-        <div className="mainSelect">
-            <button className="select">❮</button>
-            <button className="select">1</button>
-            <button className="select">2</button>
-            <button className="select">3</button>
-            <button className="select">4</button>
-            <button className="select">5</button>
-            <button className="select">❯</button>
+        <div>
+            <div className="mainSelect">
+                <button onClick={() => { paginate(1) }} className="selectArrow">❮</button>
+                {pageNumbers.map((number => (
+                    <div key={number} select>
+                        <button onClick={() => paginate(number)} href="!#" className="select">
+                            {number}
+                        </button>
+                    </div>
+                )))}
+                <button onClick={() => { paginate(Math.ceil(totalTodos / todosPerPage)) }} className="selectArrow">❯</button>
+            </div>
         </div>
     )
 }

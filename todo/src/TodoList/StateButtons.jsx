@@ -5,15 +5,12 @@ import { useState } from "react";
 const StateButton = ({ todo, setTodos, filtered, changeStatus }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.title);
     const [status, setStatus] = useState('')
-    console.log(todo);
 
     const editItem = (e, currentTitle, id) => {
-        console.log(e);
         const item = filtered.find(el => el.id === id);
 
         const itemIndex = filtered.findIndex(el => el.id === id);
         if (e.keyCode === 13) {
-            console.log('hello');
             item.title = currentTitle
             const arr = filtered
             arr[itemIndex] = item
@@ -49,7 +46,7 @@ const StateButton = ({ todo, setTodos, filtered, changeStatus }) => {
                         changeStatus(newStatus, todo.id)
                     }} />
                     <div>
-                        <input value={currentTitle} onKeyDown={(e) => editItem(e, currentTitle, todo.id)} onChange={(e) => setCurrentTitle(e.target.value)}
+                        <input value={currentTitle} onKeyDown={(e) => editItem(e, currentTitle, todo.id)} className="sideInput" onChange={(e) => setCurrentTitle(e.target.value)}
                         />
                     </div>
                 </div>

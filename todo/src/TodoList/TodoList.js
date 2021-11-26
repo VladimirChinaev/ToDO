@@ -1,17 +1,24 @@
+import React from 'react';
 import StateButtons from "../TodoList/StateButtons"
 import { v4 as uuidv4 } from 'uuid';
 
-
-
 const TodoList = (props) => {
-
-    let taskElements = props.filtered.map(e => <StateButtons removeItem={props.removeItem} setTodos={props.setTodos} todos={props.todos} setText={props.setText} text={props.text} changeStatus={props.changeStatus} todo={e} filtered={props.filtered} />)
     return (
-        <div className="todoList">
-            {taskElements.map((task) => {
-                return (<div key={uuidv4()}>{task}</div>)
-            })}
-        </div>
+        <div className="todoList">{
+            props.filtered.slice(props.indexOfFirstTodo, props.IndexOfLastTodo).map(todo => (
+                <div key={uuidv4()}>
+                    <StateButtons
+                        removeItem={props.removeItem}
+                        setTodos={props.setTodos}
+                        todos={props.todos}
+                        setText={props.setText}
+                        text={props.text}
+                        changeStatus={props.changeStatus}
+                        todo={todo}
+                        filtered={props.filtered}
+                    />
+                </div>))
+        }</div>
     );
 }
 

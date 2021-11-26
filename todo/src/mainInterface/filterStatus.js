@@ -1,3 +1,5 @@
+import React from 'react';
+
 const FilterStatus = (props) => {
     return (
         <div>

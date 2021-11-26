@@ -2,7 +2,6 @@ import { useState } from "react";
 const Input = (props) => {
     const [inputText, setinputText] = useState('')
     const handleCreate = (e, name) => {
-        console.log(123, name);
         props.handleChangeTodos(e, name)
         setinputText('')
     }
