@@ -1,0 +1,192 @@
+body {
+    height: 1000px;
+    background: linear-gradient(to top, #0372b3f6 5%, #01000a 90%);
+    color: #8691a3fb;
+}
+
+
+
+/* главный слот, содержит в себе инпут */
+.mainInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* сам инпут */
+.input {
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+/* главная панель */  
+.mainInterface {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* сторонная панель */
+.saideInterface {
+    margin-left: 15px;
+    display: flex;
+    align-items: baseline;
+}
+
+/* заголовок */
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+/* список ToDO */
+.todoList {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ToDO */
+.todoElement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    padding: 12px;
+    margin-bottom: 3px;
+    margin-top: 5px;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+/* внутри элемента */
+.inElement {
+    display: flex;
+    align-items: baseline;
+    column-gap: 5px;
+}
+
+/* содержимое элемента */
+.text {
+    display: flex;
+    justify-content:space-between;
+}
+
+/* стрелки для сортировки */
+.arrows {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+}
+
+
+.arrows:focus {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    color: black;
+    background-color: greenyellow;
+}
+
+/* основные кнопки */
+.buttons {
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.buttons:focus {
+    border-radius: 2px;
+    color: black;
+    background-color: greenyellow;
+    cursor: pointer;
+}
+
+/* кнопка выполнить */
+.buttonComplete {
+    background-color: greenyellow;
+    color: black;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* кнопка удалить */
+.buttonDelete {
+    background-color: crimson;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* главный выбор страниц */
+.mainSelect {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+/* сами страницы */
+.select {
+    margin-top: 10px;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+    width: 30px;
+    height: 25px;
+}
+
+.select:focus {
+    margin-top: 10px;
+    border-radius: 2px;
+    color: black;
+    background-color: greenyellow;
+    width: 30px;
+    height: 25px;
+}
+
+.selectArrow {
+    margin-top: 10px;
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+    width: 30px;
+    height: 25px;
+}
+
+
+.sideInput {
+    color: rgb(0, 204, 255);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 7px;
+}
