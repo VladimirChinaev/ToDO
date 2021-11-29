@@ -29,9 +29,10 @@ const App = () => {
 
   const handleChangeTodos = (e, name) => {
     e.preventDefault();
-    console.log(e);
-    const item = { id: uuidv4(), title: name, date: date(), status: "Undone" }
-    setTodos([...todos, item]);
+    if (name.replace(/\s+/g, ' ').trim() !== '') {
+      const item = { id: uuidv4(), title: name.replace(/\s+/g, ' ').trim(), date: date(), status: "Undone" }
+      setTodos([...todos, item]);
+    }
     setText("");
   }
 
