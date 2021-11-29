@@ -12,7 +12,7 @@ body {
     flex-direction: column;
 }
 
-/* сам инпут */
+/* главный инпут */
 .input {
     color: rgb(0, 204, 255);
     background-color: black;
@@ -125,10 +125,13 @@ body {
 .buttonComplete {
     background-color: greenyellow;
     color: black;
+    font-family: "Font Awesome 5 Free";
     font-size: 15px;
     border-radius: 10px;
     cursor: pointer;
 }
+
+
 
 /* кнопка удалить */
 .buttonDelete {
@@ -167,6 +170,7 @@ body {
     height: 25px;
 }
 
+/* стрелки выбора страниц */
 .selectArrow {
     margin-top: 10px;
     color: rgb(0, 204, 255);

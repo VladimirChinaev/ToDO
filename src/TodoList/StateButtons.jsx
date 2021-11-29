@@ -35,7 +35,7 @@ const StateButton = ({ todo, setTodos, filtered, changeStatus }) => {
         <div key={todo.id}>
             <div className="todoElement">
                 <div className="inElement">
-                    <input type="checkbox" className="buttonComplete" checked={status === "Done" ? true : false} onChange={() => {
+                    <input type="checkbox" className="buttonComplete" defaultChecked={todo.status === "Done" ? true : false} onChange={() => {
                         let newStatus
                         if (todo.status === "Done") {
                             newStatus = "Undone";
