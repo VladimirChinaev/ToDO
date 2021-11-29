@@ -4,8 +4,6 @@ body {
     color: #8691a3fb;
 }
 
-
-
 /* главный слот, содержит в себе инпут */
 .mainInput {
     display: flex;
@@ -20,7 +18,7 @@ body {
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 7px;
 }
 
@@ -66,7 +64,7 @@ body {
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 7px;
 }
 
@@ -96,18 +94,18 @@ body {
     border-radius: 7px;
 }
 
-
 .arrows:focus {
     width: 30px;
     height: 20px;
     cursor: pointer;
     color: black;
-    background-color: greenyellow;
+    background-color: rgb(3, 127, 158);;
 }
 
 /* основные кнопки */
 .buttons {
     color: rgb(0, 204, 255);
+    color: rgb(3, 127, 158);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
@@ -117,9 +115,9 @@ body {
 }
 
 .buttons:focus {
-    border-radius: 2px;
+    border-radius: 7px;
     color: black;
-    background-color: greenyellow;
+    background-color: rgb(3, 127, 158);;
     cursor: pointer;
 }
 
@@ -162,9 +160,9 @@ body {
 
 .select:focus {
     margin-top: 10px;
-    border-radius: 2px;
+    border-radius: 7px;
     color: black;
-    background-color: greenyellow;
+    background-color: rgb(3, 127, 158);;
     width: 30px;
     height: 25px;
 }
@@ -181,7 +179,7 @@ body {
     height: 25px;
 }
 
-
+ /* input в Todo   */
 .sideInput {
     color: rgb(0, 204, 255);
     background-color: black;
