@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const StateButton = ({ todo, setTodos, filtered, changeStatus }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.title);
-    const [status, setStatus] = useState('')
 
     const editItem = (e, currentTitle, id) => {
         const item = filtered.find(el => el.id === id);
@@ -42,7 +41,6 @@ const StateButton = ({ todo, setTodos, filtered, changeStatus }) => {
                         } else {
                             newStatus = "Done"
                         }
-                        setStatus(newStatus);
                         changeStatus(newStatus, todo.id)
                     }} />
                     <div>

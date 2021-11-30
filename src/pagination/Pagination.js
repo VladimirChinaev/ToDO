@@ -5,6 +5,7 @@ const Pagination = ({ todosPerPage, totalTodos, paginate }) => {
     for (let i = 1; i <= (Math.ceil(totalTodos / todosPerPage)); i++) {
         pageNumbers.push(i);
     }
+
     return (
         <div>
             <div className="mainSelect">

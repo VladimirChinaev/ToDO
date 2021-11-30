@@ -60,7 +60,7 @@ const App = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div className="container">
       <Title />
       <div className="mainInput">
         <Input text={text} setText={setText} handleChangeTodos={handleChangeTodos} />
