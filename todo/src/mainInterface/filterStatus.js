@@ -1,13 +1,16 @@
 import React from 'react';
 
-const FilterStatus = (props) => {
+const FilterStatus = ({ setFilter }) => {
+    const todoFilter = (todo) => {
+        setFilter(todo);
+    }
     return (
         <div>
-            <button type="button" className="buttons" onClick={() => props.todoFilter("All")}
+            <button type="button" className="buttons" onClick={() => todoFilter("")}
             >All</button>
-            <button type="button" className="buttons" onClick={() => props.todoFilter("Done")}
+            <button type="button" className="buttons" onClick={() => todoFilter("done")}
             >Done</button>
-            <button type="button" className="buttons" onClick={() => props.todoFilter("Undone")}
+            <button type="button" className="buttons" onClick={() => todoFilter("undone")}
             >Undone</button>
         </div>
     )

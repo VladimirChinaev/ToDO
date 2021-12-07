@@ -1,24 +1,21 @@
-import { useState } from "react";
 const Input = (props) => {
-    const [inputText, setinputText] = useState('')
     const handleCreate = (e, name) => {
-        props.handleChangeTodos(e, name)
-        setinputText('')
-    }
+        props.handleCreateTodos(e, name);
+    };
     return (
-        <form onSubmit={(e) => handleCreate(e, inputText)}>
+        <form onSubmit={(e) => handleCreate(e, props.text)}>
             <div className="mainInput">
                 <input
                     type="text"
                     required
                     placeholder="I want to..."
-                    value={inputText}
-                    onChange={(e) => setinputText(e.target.value)}
+                    value={props.text}
+                    onChange={(e) => props.setText(e.target.value)}
                     className="input"
                 ></input>
             </div>
         </form>
-    )
-}
+    );
+};
 
 export default Input;

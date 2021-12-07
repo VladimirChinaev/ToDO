@@ -4,6 +4,29 @@ body {
     color: #8691a3fb;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0px auto;
+    padding: 0px 15px;
+}
+
+@media (max-width:1200px){
+    .container{
+        max-width: 970px;
+    }
+}
+
+@media (max-width:992px){
+    .container{
+        max-width: 750px;
+    }
+}
+
+@media (max-width:767px){
+    .container{
+        max-width: 400px;
+    } 
+}
 
 
 /* главный слот, содержит в себе инпут */
@@ -14,13 +37,13 @@ body {
     flex-direction: column;
 }
 
-/* сам инпут */
+/* главный инпут */
 .input {
     color: rgb(0, 204, 255);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 13px;
     border-radius: 7px;
 }
 
@@ -58,22 +81,23 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
-    padding: 12px;
+    width: 320px;
+    padding: 10px;
     margin-bottom: 3px;
     margin-top: 5px;
     color: rgb(0, 204, 255);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 16px;
-    border-radius: 7px;
+    font-size: 13px;
+    border-radius: 10px;
 }
+
 
 /* внутри элемента */
 .inElement {
     display: flex;
-    align-items: baseline;
+    margin-left: 8px;
     column-gap: 5px;
 }
 
@@ -96,30 +120,30 @@ body {
     border-radius: 7px;
 }
 
-
 .arrows:focus {
     width: 30px;
     height: 20px;
     cursor: pointer;
     color: black;
-    background-color: greenyellow;
+    background-color: rgb(3, 127, 158);;
 }
 
 /* основные кнопки */
 .buttons {
     color: rgb(0, 204, 255);
+    color: rgb(3, 127, 158);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     border-radius: 7px;
     cursor: pointer;
 }
 
 .buttons:focus {
-    border-radius: 2px;
+    border-radius: 7px;
     color: black;
-    background-color: greenyellow;
+    background-color: rgb(3, 127, 158);;
     cursor: pointer;
 }
 
@@ -127,15 +151,19 @@ body {
 .buttonComplete {
     background-color: greenyellow;
     color: black;
-    font-size: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-size: 13px;
     border-radius: 10px;
+    margin-right: 8px;
     cursor: pointer;
 }
+
+
 
 /* кнопка удалить */
 .buttonDelete {
     background-color: crimson;
-    font-size: 15px;
+    font-size: 12px;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -154,39 +182,57 @@ body {
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 7px;
-    width: 30px;
-    height: 25px;
+    width: 25px;
+    height: 20px;
 }
 
 .select:focus {
     margin-top: 10px;
-    border-radius: 2px;
+    border-radius: 7px;
     color: black;
-    background-color: greenyellow;
-    width: 30px;
-    height: 25px;
+    background-color: rgb(3, 127, 158);;
+    width: 25px;
+    height: 20px;
 }
 
+/* стрелки выбора страниц */
 .selectArrow {
     margin-top: 10px;
     color: rgb(0, 204, 255);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 7px;
-    width: 30px;
-    height: 25px;
+    width: 25px;
+    height: 20px;
 }
 
+.selectArrow:focus {
+    margin-top: 10px;
+    color: black;
+    background-color: rgb(3, 127, 158);;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    border-radius: 7px;
+    width: 25px;
+    height: 20px;
+}
 
+ /* input в Todo   */
 .sideInput {
     color: rgb(0, 204, 255);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 7px;
+}
+
+.inSelect {
+    display: flex;
+    align-items: baseline;
 }

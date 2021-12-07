@@ -6,16 +6,12 @@ const TodoList = (props) => {
     return (
         <div className="todoList">{
             props.filtered.slice(props.indexOfFirstTodo, props.IndexOfLastTodo).map(todo => (
-                <div key={uuidv4()}>
+                <div key={todo.uuid}>
                     <StateButtons
                         removeItem={props.removeItem}
-                        setTodos={props.setTodos}
-                        todos={props.todos}
-                        setText={props.setText}
-                        text={props.text}
-                        changeStatus={props.changeStatus}
                         todo={todo}
                         filtered={props.filtered}
+                        changeStatus={props.changeStatus}
                     />
                 </div>))
         }</div>
