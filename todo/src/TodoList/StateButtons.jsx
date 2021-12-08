@@ -1,23 +1,31 @@
 import "../css/style.css";
 import { useState } from "react";
+import axios from "axios";
+const API_GET_TODOS = "http://localhost:3502/api/todos";
 
-const StateButton = ({ todo, filtered, removeItem, changeStatus }) => {
+const StateButton = ({ todo, filtered, removeItem, changeStatus, getTodos }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);
     const [showInput, setShowInput] = useState(false);
 
-    const editItem = (e, currentTitle, uuid) => {
-        const item = filtered.find((el) => el.uuid === uuid);
-        const itemIndex = filtered.findIndex((el) => el.uuid === uuid);
-        if (e.keyCode === 13) {
-            item.name = currentTitle;
-            const arr = filtered;
-            arr[itemIndex] = item;
-            setShowInput(false);
-        }
-        if (e.keyCode === 27) {
-            e.target.blur();
-            setShowInput(false);
-            setCurrentTitle(todo.name);
+    const editItem = async (e, currentTitle) => {
+        try {
+            if (e.keyCode === 13) {
+                await axios.patch(API_GET_TODOS + `/${todo.uuid}`, {
+                    name: currentTitle,
+                    done: todo.done === "done" ? "done" : "undone",
+                });
+                e.target.blur();
+                setShowInput(false)
+            }
+            if (e.keyCode === 27) {
+                e.target.blur();
+                setShowInput(false);
+                setCurrentTitle(todo.name);
+            }
+            getTodos();
+        } catch (err) {
+            console.log(err);
+            alert(err);
         }
     };
 

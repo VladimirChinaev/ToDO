@@ -1,25 +1,40 @@
 import React from 'react';
 
-const Pagination = ({ todosPerPage, totalTodos, paginate }) => {
+const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos, currentPage }) => {
+    console.log(currentPage);
     const pageNumbers = [];
-    for (let i = 1; i <= (Math.ceil(totalTodos / todosPerPage)); i++) {
+    for (let i = 1; i <= (Math.ceil(numbersOfTodos / todosPerPage)); i++) {
         pageNumbers.push(i);
     }
 
+    const pag = (number) => {
+        setCurrentPage(number);
+        pagination();
+    }
+    const pagination = async (req) => {
+        try {
+            getTodos();
+        }
+        catch (err) {
+            console.log(err);
+            alert(err);
+        }
+    }
+    console.log(currentPage);
     return (
         <div>
             <div className="mainSelect">
-                {totalTodos > 0 ?
+                {numbersOfTodos > 0 ?
                     <div className="inSelect">
-                        <button onClick={() => { paginate(1) }} className="selectArrow">❮</button>
+                        <button onClick={() => { pag(1) }} className="selectArrow">❮</button>
                         {pageNumbers.map((number => (
                             <div key={number} select>
-                                <button onClick={() => paginate(number)} href="!#" className="select">
+                                <button onClick={() => pag(number)} href="!#" className="select">
                                     {number}
                                 </button>
                             </div>
                         )))}
-                        <button onClick={() => { paginate(Math.ceil(totalTodos / todosPerPage)) }} className="selectArrow">❯</button>
+                        <button onClick={() => { pag(Math.ceil(numbersOfTodos / todosPerPage)) }} className="selectArrow">❯</button>
                     </div>
                     : ""}
             </div>
@@ -27,4 +42,7 @@ const Pagination = ({ todosPerPage, totalTodos, paginate }) => {
     )
 }
 
-export default Pagination;
+export default Paginate;
+
+
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import StateButtons from "../TodoList/StateButtons"
-import { v4 as uuidv4 } from 'uuid';
+
 
 const TodoList = (props) => {
     return (
@@ -12,6 +12,9 @@ const TodoList = (props) => {
                         todo={todo}
                         filtered={props.filtered}
                         changeStatus={props.changeStatus}
+                        getTodos={props.getTodos}
+                        IndexOfLastTodo={props.IndexOfLastTodo}
+                        indexOfFirstTodo={props.indexOfFirstTodo}
                     />
                 </div>))
         }</div>

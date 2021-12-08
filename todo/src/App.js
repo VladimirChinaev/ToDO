@@ -5,31 +5,32 @@ import SortDate from "./mainInterface/SortDate";
 import Title from "./Title/Title";
 import FilterStatus from "./mainInterface/filterStatus";
 import Input from "./input/Input";
-import Pagination from "./pagination/Pagination";
+import Paginate from "./pagination/Pagination";
 import axios from "axios";
-import { debounce } from "./utils/debounce";
-const API_GET_TODOS = "http://localhost:3500/api/todos";
+const API_GET_TODOS = "http://localhost:3502/api/todos";
 const App = () => {
     const [text, setText] = useState("");
-    const [filter, setFilter] = useState("undone");
+    const [filter, setFilter] = useState("");
     const [filtered, setFiltered] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState();
+    const [numbersOfTodos, setNumbersOfTodos] = useState();
     const todosPerPage = 5;
+    console.log(currentPage);
     useEffect(() => {
         getTodos();
-    }, [filter]);
+    }, [filter, currentPage]);
 
     const getTodos = async () => {
         try {
-            const href =
-                API_GET_TODOS + `?${filter && `filterBy=${filter}`}&order=asc`;
+            const href = API_GET_TODOS + `?${filter !== '' && `filterBy=${filter}&page=${currentPage}&`}order=asc`;
             const result = await axios.get(href);
             setFiltered(result.data.info);
+            setNumbersOfTodos(result.data.count);
+            console.log(result);
         } catch (err) {
             alert(err);
         }
     };
-
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
@@ -47,13 +48,22 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            await axios.patch(API_GET_TODOS + `/${todo.uuid}`, {
+            const resault = await axios.patch(API_GET_TODOS + `/${todo.uuid}`, {
                 name: todo.name,
                 done: todo.done === "done" ? "undone" : "done",
             });
-            console.log(todo.name);
-            console.log(todo.done);
+            setCurrentPage(resault.data.page)
             getTodos();
+        } catch (err) {
+            console.log(err);
+            alert(err);
+        }
+    };
+
+    const removeItem = async (uuid) => {
+        try {
+            await axios.delete(API_GET_TODOS + `/${uuid}`);
+            await getTodos();
         } catch (err) {
             console.log(err);
             alert(err);
@@ -63,18 +73,7 @@ const App = () => {
     const IndexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = IndexOfLastTodo - todosPerPage;
 
-    const removeItem = async (uuid) => {
-        try {
-            await axios.delete(API_GET_TODOS + `/${uuid}`);
-            await getTodos();
 
-        } catch (err) {
-            console.log(err);
-            alert(err);
-        }
-    };
-
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
         <div className="container">
             <Title />
@@ -92,16 +91,19 @@ const App = () => {
             <div className="todoList">
                 <TodoList
                     filtered={filtered}
-                    IndexOfLastTodo={IndexOfLastTodo}
-                    indexOfFirstTodo={indexOfFirstTodo}
                     removeItem={removeItem}
                     changeStatus={changeStatus}
+                    getTodos={getTodos}
+                    IndexOfLastTodo={IndexOfLastTodo}
+                    indexOfFirstTodo={indexOfFirstTodo}
                 />
             </div>
-            <Pagination
+            <Paginate
                 todosPerPage={todosPerPage}
-                totalTodos={filtered.length}
-                paginate={paginate}
+                numbersOfTodos={numbersOfTodos}
+                setCurrentPage={setCurrentPage}
+                getTodos={getTodos}
+                currentPage={currentPage}
             />
         </div>
     );
