@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 const API_GET_TODOS = "http://localhost:3502/api/todos";
 
-const StateButton = ({ todo, filtered, removeItem, changeStatus, getTodos }) => {
+const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);
     const [showInput, setShowInput] = useState(false);
 
@@ -15,7 +15,7 @@ const StateButton = ({ todo, filtered, removeItem, changeStatus, getTodos }) => 
                     done: todo.done === "done" ? "done" : "undone",
                 });
                 e.target.blur();
-                setShowInput(false)
+                setShowInput(false);
             }
             if (e.keyCode === 27) {
                 e.target.blur();

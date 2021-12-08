@@ -12,7 +12,7 @@ const App = () => {
     const [text, setText] = useState("");
     const [filter, setFilter] = useState("");
     const [filtered, setFiltered] = useState([]);
-    const [currentPage, setCurrentPage] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
     const [numbersOfTodos, setNumbersOfTodos] = useState();
     const todosPerPage = 5;
     console.log(currentPage);
@@ -21,12 +21,19 @@ const App = () => {
     }, [filter, currentPage]);
 
     const getTodos = async () => {
+        const filterForQuery = filter && `filterBy=${filter}`;
         try {
-            const href = API_GET_TODOS + `?${filter !== '' && `filterBy=${filter}&page=${currentPage}&`}order=asc`;
+            const href =
+                API_GET_TODOS +
+                `?${filterForQuery}
+                &page=${currentPage}
+                &order=asc
+                `;
+            console.log(href);
             const result = await axios.get(href);
             setFiltered(result.data.info);
             setNumbersOfTodos(result.data.count);
-            console.log(result);
+            console.log(filtered);
         } catch (err) {
             alert(err);
         }
@@ -52,7 +59,7 @@ const App = () => {
                 name: todo.name,
                 done: todo.done === "done" ? "undone" : "done",
             });
-            setCurrentPage(resault.data.page)
+            setCurrentPage(resault.data.page);
             getTodos();
         } catch (err) {
             console.log(err);
@@ -72,7 +79,6 @@ const App = () => {
 
     const IndexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = IndexOfLastTodo - todosPerPage;
-
 
     return (
         <div className="container">
