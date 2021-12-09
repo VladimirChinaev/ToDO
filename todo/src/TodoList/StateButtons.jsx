@@ -1,7 +1,7 @@
 import "../css/style.css";
 import { useState } from "react";
 import axios from "axios";
-const API_GET_TODOS = "http://localhost:3502/api/todos";
+const API_GET_TODOS = "https://back-end-api-1.herokuapp.com/api/todos";
 
 const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);

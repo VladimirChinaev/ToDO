@@ -7,7 +7,7 @@ import FilterStatus from "./mainInterface/filterStatus";
 import Input from "./input/Input";
 import Paginate from "./pagination/Pagination";
 import axios from "axios";
-const API_GET_TODOS = "http://localhost:3502/api/todos";
+const API_GET_TODOS = "https://back-end-api-1.herokuapp.com/api/todos";
 const App = () => {
     const [text, setText] = useState("");
     const [filter, setFilter] = useState("");
@@ -24,20 +24,16 @@ const App = () => {
         const filterForQuery = filter && `filterBy=${filter}`;
         try {
             const href =
-                API_GET_TODOS +
-                `?${filterForQuery}
-                &page=${currentPage}
-                &order=asc
-                `;
-            console.log(href);
+                API_GET_TODOS + `?${filterForQuery}&page=${currentPage}&order=asc`;
             const result = await axios.get(href);
             setFiltered(result.data.info);
             setNumbersOfTodos(result.data.count);
-            console.log(filtered);
+            console.log();
         } catch (err) {
             alert(err);
         }
     };
+    console.log("132141254135133513412312312312", filtered);
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
@@ -71,6 +67,10 @@ const App = () => {
         try {
             await axios.delete(API_GET_TODOS + `/${uuid}`);
             await getTodos();
+            console.log(filtered);
+            if (filtered.length - 1 === 0) {
+                setCurrentPage(currentPage - 1);
+            }
         } catch (err) {
             console.log(err);
             alert(err);

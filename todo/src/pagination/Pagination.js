@@ -21,6 +21,7 @@ const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos, curr
         }
     }
     console.log(currentPage);
+    console.log(numbersOfTodos);
     return (
         <div>
             <div className="mainSelect">
