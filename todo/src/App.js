@@ -15,7 +15,6 @@ const App = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [numbersOfTodos, setNumbersOfTodos] = useState();
     const todosPerPage = 5;
-    console.log(currentPage);
     useEffect(() => {
         getTodos();
     }, [filter, currentPage]);
@@ -28,12 +27,10 @@ const App = () => {
             const result = await axios.get(href);
             setFiltered(result.data.info);
             setNumbersOfTodos(result.data.count);
-            console.log();
         } catch (err) {
             alert(err);
         }
     };
-    console.log("132141254135133513412312312312", filtered);
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
@@ -55,7 +52,7 @@ const App = () => {
                 name: todo.name,
                 done: todo.done === "done" ? "undone" : "done",
             });
-            setCurrentPage(resault.data.page);
+            console.log(resault);
             getTodos();
         } catch (err) {
             console.log(err);
@@ -68,7 +65,7 @@ const App = () => {
             await axios.delete(API_GET_TODOS + `/${uuid}`);
             await getTodos();
             console.log(filtered);
-            if (filtered.length - 1 === 0) {
+            if (filtered.length - 1 === 0 && currentPage > 1) {
                 setCurrentPage(currentPage - 1);
             }
         } catch (err) {
