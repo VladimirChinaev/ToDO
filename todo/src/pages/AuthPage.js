@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { useHttp } from "../hooks/http.hook"
 
 
 export const AuthPage = () => {
+    const { loading, error, request } = useHttp();
     const [form, setForm] = useState({
-        user: "", email: "", password: ""
+        email: "", password: "",
     })
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
+    }
+
+    const registerHandler = async () => {
+        try {
+            const data = await request("api/auth/register", "POST", { ...form });
+            console.log("Data", data);
+        } catch (e) { }
     }
 
     return (
@@ -16,14 +25,6 @@ export const AuthPage = () => {
                 <h1>Welcome!</h1>
             </div>
             <form method="post">
-                <input
-                    type="text"
-                    name="user"
-                    placeholder="Username..."
-                    required="required"
-                    className="inputAuth"
-                    id="user"
-                    onChange={changeHandler} />
                 <input
                     type="email"
                     name="email"
@@ -41,8 +42,18 @@ export const AuthPage = () => {
                     id="password"
                     onChange={changeHandler} />
                 <div className="buttonsAuthContainer">
-                    <button type="submit" className="buttonsAuth">Sign in</button>
-                    <button type="submit" className="buttonsAuth">Sign up</button>
+                    <button
+                        type="submit"
+                        className="buttonsAuth"
+                        disabled={loading}
+                    >
+                        Sign in</button>
+                    <button
+                        type="submit"
+                        className="buttonsAuth"
+                        disabled={loading}
+                        onClick={registerHandler}
+                    >Sign up</button>
                 </div>
             </form>
         </div>
