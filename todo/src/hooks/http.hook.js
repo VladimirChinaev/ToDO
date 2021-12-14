@@ -7,7 +7,12 @@ export const useHttp = () => {
     const request = useCallback(async (url, method = "GET", body = null, headers = {}) => {
         setLoading(true);
         try {
-            const response = await axios(url, { method, body, headers })
+            if (body) {
+                // body = JSON.stringify(body);
+                // headers["Content-Type"] = "application/json"
+            }
+            console.log(body);
+            const response = await axios({ url, method, data: body, headers })
             if (!response) {
                 throw new Error(response || "Something was going wrong...")
             }

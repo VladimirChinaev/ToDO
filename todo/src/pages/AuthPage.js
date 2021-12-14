@@ -3,18 +3,20 @@ import { useHttp } from "../hooks/http.hook"
 
 
 export const AuthPage = () => {
-    const { loading, error, request } = useHttp();
+    const { loading, request } = useHttp();
     const [form, setForm] = useState({
         email: "", password: "",
     })
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
+        console.log(form);
     }
 
     const registerHandler = async () => {
         try {
-            const data = await request("api/auth/register", "POST", { ...form });
+            console.log(form);
+            const data = await request("api/register", "POST", form);
             console.log("Data", data);
         } catch (e) { }
     }
@@ -26,7 +28,7 @@ export const AuthPage = () => {
             </div>
             <form method="post">
                 <input
-                    type="email"
+                    type="text"
                     name="email"
                     placeholder="Email..."
                     required="required"
