@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { useHttp } from "../hooks/http.hook"
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../context/auth.context";
+import { useHttp } from "../hooks/http.hook";
+import { useNavigate } from "react-router-dom";
 
 
 export const AuthPage = () => {
+    const auth = useContext(AuthContext)
     const { loading, request } = useHttp();
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         email: "", password: "",
     })
+    console.log(auth.isAuthenticated);
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -19,6 +24,17 @@ export const AuthPage = () => {
             const data = await request("api/register", "POST", form);
             console.log("Data", data);
         } catch (e) { }
+    }
+
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/login', 'POST', { ...form })
+            console.log("Data:", data);
+            auth.login(data.data.token, data.data.userId);
+            navigate("/app", { replace: true });
+        } catch (e) {
+
+        }
     }
 
     return (
@@ -48,6 +64,7 @@ export const AuthPage = () => {
                         type="submit"
                         className="buttonsAuth"
                         disabled={loading}
+                        onClick={loginHandler}
                     >
                         Sign in</button>
                     <button
