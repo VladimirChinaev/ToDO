@@ -1,34 +1,45 @@
 import "./App.css";
 import TodoList from "./TodoList/TodoList";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import SortDate from "./mainInterface/SortDate";
 import Title from "./Title/Title";
 import FilterStatus from "./mainInterface/filterStatus";
 import Input from "./input/Input";
 import Paginate from "./pagination/Pagination";
 import axios from "axios";
-const API_GET_TODOS = "https://back-end-api-1.herokuapp.com/api/todos";
+import { AuthContext } from "./context/auth.context";
+const API_GET_TODOS = "http://localhost:3505/api/todos";
 const App = () => {
     const [text, setText] = useState("");
     const [filter, setFilter] = useState("");
     const [filtered, setFiltered] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numbersOfTodos, setNumbersOfTodos] = useState();
+    const { token } = useContext(AuthContext);
+    console.log('>>>>>>>>>>>>>', token);
     const todosPerPage = 5;
     useEffect(() => {
         getTodos();
     }, [filter, currentPage]);
 
     const getTodos = async () => {
+        console.log('getTodos token: ', token);
         const filterForQuery = filter && `filterBy=${filter}`;
         try {
             const href =
                 API_GET_TODOS + `?${filterForQuery}&page=${currentPage}&order=asc`;
-            const result = await axios.get(href);
+            const result = await axios({
+                method: "GET",
+                url: href,
+                headers: {
+                    authorization: "Bearer " + token
+                }
+            });
             setFiltered(result.data.info);
             setNumbersOfTodos(result.data.count);
         } catch (err) {
-            alert(err);
+            console.log('getTodos err token', token);
+            console.log('getTodos err response', err.response);
         }
     };
     const handleCreateTodos = async (e, name) => {

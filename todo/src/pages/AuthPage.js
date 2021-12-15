@@ -23,6 +23,7 @@ export const AuthPage = () => {
             console.log(form);
             const data = await request("api/register", "POST", form);
             console.log("Data", data);
+            navigate("/app", { replace: true });
         } catch (e) { }
     }
 
