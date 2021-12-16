@@ -1,26 +1,26 @@
 import "../css/style.css";
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 const API_GET_TODOS = "http://localhost:3505/api/todos";
 
-const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
+
+const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);
     const [showInput, setShowInput] = useState(false);
-
-    const editItem = async (e, currentTitle) => {
+    const editItem = async (e, currentTitle, todo) => {
         try {
             if (e.keyCode === 13) {
-                await axios.patch(API_GET_TODOS + `/${todo.uuid}`, {
-                    name: currentTitle,
-                    done: todo.done === "done" ? "done" : "undone",
+                await axios(API_GET_TODOS + `/${todo.uuid}`, {
+                    method: "PATCH",
+                    body: {
+                        name: currentTitle,
+                        done: todo.done === "done" ? "done" : "undone",
+                    },
                 });
                 e.target.blur();
-                setShowInput(false);
             }
             if (e.keyCode === 27) {
                 e.target.blur();
-                setShowInput(false);
-                setCurrentTitle(todo.name);
             }
             getTodos();
         } catch (err) {
@@ -28,7 +28,6 @@ const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
             alert(err);
         }
     };
-
     return (
         <div key={todo.uuid}>
             <div className="todoElement">
@@ -49,7 +48,7 @@ const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
                         <input
                             value={currentTitle}
                             onKeyDown={(e) =>
-                                editItem(e, currentTitle, todo.uuid)
+                                editItem(e, currentTitle, todo.id)
                             }
                             className="sideInput"
                             onChange={(e) => setCurrentTitle(e.target.value)}
@@ -65,7 +64,7 @@ const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
                         value="🗑"
                         className="buttonDelete"
                         onClick={() => {
-                            removeItem(todo.uuid);
+                            removeItem(todo.id);
                         }}
                     />
                 </div>
@@ -74,4 +73,4 @@ const StateButton = ({ todo, removeItem, changeStatus, getTodos }) => {
     );
 };
 
-export default StateButton;
+export default TodoItem;

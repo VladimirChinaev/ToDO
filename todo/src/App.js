@@ -16,12 +16,12 @@ const App = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [numbersOfTodos, setNumbersOfTodos] = useState();
     const { token } = useContext(AuthContext);
-    console.log('>>>>>>>>>>>>>', token);
     const todosPerPage = 5;
     useEffect(() => {
         if (token) { getTodos(); }
 
     }, [filter, currentPage, token]);
+
     const getTodos = async () => {
         const filterForQuery = filter && `filterBy=${filter}`;
         try {
@@ -67,11 +67,18 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            const resault = await axios.patch(API_GET_TODOS + `/${todo.uuid}`, {
-                name: todo.name,
-                done: todo.done === "done" ? "undone" : "done",
+            const resault = await axios(API_GET_TODOS + `/${todo.id}`, {
+                method: "PATCH",
+                data: {
+                    name: todo.name,
+                    done: todo.done === "undone" ? "undone" : "done"
+                },
+                headers: {
+                    Authorization: "Bearer " + token
+                }
             });
             console.log(resault);
+            console.log(todo.done);
             getTodos();
         } catch (err) {
             console.log(err);
@@ -81,8 +88,14 @@ const App = () => {
 
     const removeItem = async (uuid) => {
         try {
-            await axios.delete(API_GET_TODOS + `/${uuid}`);
+            const resault = await axios(API_GET_TODOS + `/${uuid}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            });
             await getTodos();
+            console.log(resault);
             if (filtered.length - 1 === 0 && currentPage > 1) {
                 setCurrentPage(currentPage - 1);
             }
@@ -91,6 +104,8 @@ const App = () => {
             alert(err);
         }
     };
+
+
 
     const IndexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = IndexOfLastTodo - todosPerPage;
@@ -115,9 +130,9 @@ const App = () => {
                         filtered={filtered}
                         removeItem={removeItem}
                         changeStatus={changeStatus}
-                        getTodos={getTodos}
                         IndexOfLastTodo={IndexOfLastTodo}
                         indexOfFirstTodo={indexOfFirstTodo}
+                        getTodos={getTodos}
                     />)
                     : void (0)}
             </div>

@@ -1,18 +1,19 @@
 import React from "react";
-import StateButtons from "../TodoList/StateButtons";
+import TodoItem from "./TodoItem";
 
-const TodoList = (props) => {
+const TodoList = ({ filtered, removeItem, changeStatus, IndexOfLastTodo, indexOfFirstTodo, editItem, getTodos }) => {
     return (
         <div className="todoList">
-            {props.filtered.map((todo) => (
+            {filtered.map((todo) => (
                 <div key={todo.uuid}>
-                    <StateButtons
-                        removeItem={props.removeItem}
+                    <TodoItem
+                        removeItem={removeItem}
                         todo={todo}
-                        changeStatus={props.changeStatus}
-                        getTodos={props.getTodos}
-                        IndexOfLastTodo={props.IndexOfLastTodo}
-                        indexOfFirstTodo={props.indexOfFirstTodo}
+                        changeStatus={changeStatus}
+                        IndexOfLastTodo={IndexOfLastTodo}
+                        indexOfFirstTodo={indexOfFirstTodo}
+                        editItem={editItem}
+                        getTodos={getTodos}
                     />
                 </div>
             ))}
