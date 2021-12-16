@@ -67,7 +67,7 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            console.log(todo);
+            console.log(todo.id);
             const resault = await axios(API_GET_TODOS + `/${todo.id}`, {
                 method: "PATCH",
                 data: {

@@ -23,9 +23,12 @@ const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
                     }
                 });
                 e.target.blur();
+                setShowInput(false);
             }
             if (e.keyCode === 27) {
                 e.target.blur();
+                setCurrentTitle(todo.name);
+                setShowInput(false);
             }
             getTodos();
         } catch (err) {
@@ -52,7 +55,7 @@ const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
                         <input
                             value={currentTitle}
                             onKeyDown={(e) =>
-                                editItem(e, currentTitle, todo.id)
+                                editItem(e, currentTitle, todo)
                             }
                             className="sideInput"
                             onChange={(e) => setCurrentTitle(e.target.value)}

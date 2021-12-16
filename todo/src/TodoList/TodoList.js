@@ -5,7 +5,7 @@ const TodoList = ({ filtered, removeItem, changeStatus, IndexOfLastTodo, indexOf
     return (
         <div className="todoList">
             {filtered.map((todo) => (
-                <div key={todo.uuid}>
+                <div key={todo.id}>
                     <TodoItem
                         removeItem={removeItem}
                         todo={todo}
