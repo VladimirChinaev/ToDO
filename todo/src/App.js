@@ -46,12 +46,13 @@ const App = () => {
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
+            console.log(name);
             await axios(API_GET_TODOS, {
                 method: "POST",
-                body: {
-                    name: name.name
+                data: {
+                    name: name,
+                    done: "undone",
                 },
-                done: "undone",
                 headers: {
                     Authorization: "Bearer " + token
                 }
