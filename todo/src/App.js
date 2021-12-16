@@ -19,11 +19,10 @@ const App = () => {
     console.log('>>>>>>>>>>>>>', token);
     const todosPerPage = 5;
     useEffect(() => {
-        getTodos();
-    }, [filter, currentPage]);
+        if (token) { getTodos(); }
 
+    }, [filter, currentPage, token]);
     const getTodos = async () => {
-        console.log('getTodos token: ', token);
         const filterForQuery = filter && `filterBy=${filter}`;
         try {
             const href =
@@ -32,22 +31,30 @@ const App = () => {
                 method: "GET",
                 url: href,
                 headers: {
-                    authorization: "Bearer " + token
+                    Authorization: "Bearer " + token
                 }
             });
-            setFiltered(result.data.info);
-            setNumbersOfTodos(result.data.count);
+            setFiltered(result.data.data.rows);
+            setNumbersOfTodos(result.data.data.count);
         } catch (err) {
             console.log('getTodos err token', token);
             console.log('getTodos err response', err.response);
         }
     };
+
+
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
-            await axios.post(API_GET_TODOS, {
-                name: name,
+            await axios(API_GET_TODOS, {
+                method: "POST",
+                body: {
+                    name: name.name
+                },
                 done: "undone",
+                headers: {
+                    Authorization: "Bearer " + token
+                }
             });
             getTodos();
             setText("");
@@ -75,7 +82,6 @@ const App = () => {
         try {
             await axios.delete(API_GET_TODOS + `/${uuid}`);
             await getTodos();
-            console.log(filtered);
             if (filtered.length - 1 === 0 && currentPage > 1) {
                 setCurrentPage(currentPage - 1);
             }
@@ -87,7 +93,7 @@ const App = () => {
 
     const IndexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = IndexOfLastTodo - todosPerPage;
-
+    console.log(filtered);
     return (
         <div className="container">
             <Title />
@@ -103,14 +109,16 @@ const App = () => {
                 <SortDate filtered={filtered} setFiltered={setFiltered} />
             </div>
             <div className="todoList">
-                <TodoList
-                    filtered={filtered}
-                    removeItem={removeItem}
-                    changeStatus={changeStatus}
-                    getTodos={getTodos}
-                    IndexOfLastTodo={IndexOfLastTodo}
-                    indexOfFirstTodo={indexOfFirstTodo}
-                />
+                {filtered ?
+                    (<TodoList
+                        filtered={filtered}
+                        removeItem={removeItem}
+                        changeStatus={changeStatus}
+                        getTodos={getTodos}
+                        IndexOfLastTodo={IndexOfLastTodo}
+                        indexOfFirstTodo={indexOfFirstTodo}
+                    />)
+                    : void (0)}
             </div>
             <Paginate
                 todosPerPage={todosPerPage}

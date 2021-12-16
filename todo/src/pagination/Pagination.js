@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos, currentPage }) => {
-    // console.log(currentPage);
     const pageNumbers = [];
     for (let i = 1; i <= (Math.ceil(numbersOfTodos / todosPerPage)); i++) {
         pageNumbers.push(i);
@@ -20,8 +19,6 @@ const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos, curr
             alert(err);
         }
     }
-    // console.log(currentPage);
-    // console.log(numbersOfTodos);
     return (
         <div>
             <div className="mainSelect">
