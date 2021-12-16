@@ -64,7 +64,7 @@ const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
                 </div>
                 <div className="inElement">
                     <div>
-                        {new Date(Date.parse(todo.updatedAtt)).toLocaleString()}
+                        {todo.createdAt.slice(0, 10) + ' ' + todo.createdAt.slice(11, -5)}
                     </div>
                     <input
                         type="button"
