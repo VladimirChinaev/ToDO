@@ -67,11 +67,12 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
+            console.log(todo);
             const resault = await axios(API_GET_TODOS + `/${todo.id}`, {
                 method: "PATCH",
                 data: {
                     name: todo.name,
-                    done: todo.done === "undone" ? "undone" : "done"
+                    done: todo.done !== "undone" ? "undone" : "done"
                 },
                 headers: {
                     Authorization: "Bearer " + token

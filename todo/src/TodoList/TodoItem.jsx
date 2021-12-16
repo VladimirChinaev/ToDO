@@ -1,21 +1,26 @@
 import "../css/style.css";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 const API_GET_TODOS = "http://localhost:3505/api/todos";
 
 
 const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);
     const [showInput, setShowInput] = useState(false);
+    const { token } = useContext(AuthContext);
     const editItem = async (e, currentTitle, todo) => {
         try {
             if (e.keyCode === 13) {
-                await axios(API_GET_TODOS + `/${todo.uuid}`, {
+                await axios(API_GET_TODOS + `/${todo.id}`, {
                     method: "PATCH",
-                    body: {
+                    data: {
                         name: currentTitle,
-                        done: todo.done === "done" ? "done" : "undone",
+                        done: todo.done !== "done" ? "done" : "undone",
                     },
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
                 });
                 e.target.blur();
             }
@@ -35,7 +40,6 @@ const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
                     <input
                         type="checkbox"
                         className="buttonComplete"
-                        defaultChecked={todo.done === true ? true : false}
                         onClick={() => {
                             changeStatus(todo);
                         }}
