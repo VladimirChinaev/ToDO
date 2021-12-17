@@ -130,7 +130,6 @@ body {
 
 /* основные кнопки */
 .buttons {
-    color: rgb(0, 204, 255);
     color: rgb(3, 127, 158);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
@@ -340,7 +339,6 @@ body {
     width: 60px;
     height: 25px;
     color: rgb(0, 204, 255);
-    color: rgb(3, 127, 158);
     background-color: black;
     border: 2px solid rgb(2, 25, 68);
     font-family: Verdana, Arial, sans-serif;
