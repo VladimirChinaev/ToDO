@@ -8,6 +8,7 @@ import Input from "./input/Input";
 import Paginate from "./pagination/Pagination";
 import axios from "axios";
 import { AuthContext } from "./context/auth.context";
+import Exit from "./mainInterface/LogOut";
 const API_GET_TODOS = "http://localhost:3505/api/todos";
 const App = () => {
     const [text, setText] = useState("");
@@ -46,7 +47,6 @@ const App = () => {
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
-            console.log(name);
             await axios(API_GET_TODOS, {
                 method: "POST",
                 data: {
@@ -67,7 +67,6 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            console.log(todo.done);
             const resault = await axios(API_GET_TODOS + `/${todo.id}`, {
                 method: "PATCH",
                 data: {
@@ -78,8 +77,6 @@ const App = () => {
                     Authorization: "Bearer " + token
                 }
             });
-            console.log(resault);
-            console.log(todo.done);
             getTodos();
         } catch (err) {
             console.log(err);
@@ -96,7 +93,6 @@ const App = () => {
                 }
             });
             await getTodos();
-            console.log(resault);
             if (filtered.length - 1 === 0 && currentPage > 1) {
                 setCurrentPage(currentPage - 1);
             }
@@ -107,10 +103,8 @@ const App = () => {
     };
 
 
-
     const IndexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = IndexOfLastTodo - todosPerPage;
-    console.log(filtered);
     return (
         <div className="container">
             <Title />
@@ -144,6 +138,7 @@ const App = () => {
                 getTodos={getTodos}
                 currentPage={currentPage}
             />
+            <Exit />
         </div>
     );
 };

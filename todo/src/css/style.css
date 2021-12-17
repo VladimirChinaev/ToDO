@@ -330,3 +330,35 @@ body {
     display: flex;
     justify-content: space-around;
 }
+
+
+.exit {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 25px;
+    color: rgb(0, 204, 255);
+    color: rgb(3, 127, 158);
+    background-color: black;
+    border: 2px solid rgb(2, 25, 68);
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 13px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.exit:focus {
+    border-radius: 7px;
+    color: black;
+    background-color: rgb(3, 127, 158);;
+    cursor: pointer;
+}
+
+.inExit {
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+    justify-content: center;
+}

@@ -11,18 +11,14 @@ export const AuthPage = () => {
     const [form, setForm] = useState({
         email: "", password: "",
     })
-    console.log(auth.isAuthenticated);
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
-        console.log(form);
     }
 
     const registerHandler = async () => {
         try {
-            console.log(form);
             const data = await request("api/register", "POST", form);
-            console.log("Data", data);
             navigate("/auth", { replace: true });
             alert("user was created!")
         } catch (e) {
@@ -34,7 +30,6 @@ export const AuthPage = () => {
     const loginHandler = async () => {
         try {
             const data = await request('/api/login', 'POST', { ...form })
-            console.log("Data:", data);
             auth.login(data.data.token, data.data.userId);
             navigate("/app", { replace: true });
         } catch (e) {
@@ -42,6 +37,7 @@ export const AuthPage = () => {
             alert(e);
         }
     }
+
 
     return (
         <div className="login">
