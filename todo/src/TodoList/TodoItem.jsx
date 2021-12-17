@@ -16,6 +16,7 @@ const TodoItem = ({ todo, removeItem, editItem, changeStatus }) => {
                         onClick={(e) => {
                             changeStatus(todo);
                         }}
+                        checked={todo.done === 'done'}
                     />
                     {!showInput ? (
                         <span onDoubleClick={() => setShowInput(true)}>
