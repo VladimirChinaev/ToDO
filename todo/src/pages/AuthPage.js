@@ -23,8 +23,12 @@ export const AuthPage = () => {
             console.log(form);
             const data = await request("api/register", "POST", form);
             console.log("Data", data);
-            navigate("/app", { replace: true });
-        } catch (e) { }
+            navigate("/auth", { replace: true });
+            alert("user was created!")
+        } catch (e) {
+            console.log(e);
+            alert(e);
+        }
     }
 
     const loginHandler = async () => {
@@ -34,7 +38,8 @@ export const AuthPage = () => {
             auth.login(data.data.token, data.data.userId);
             navigate("/app", { replace: true });
         } catch (e) {
-
+            console.log(e);
+            alert(e);
         }
     }
 
