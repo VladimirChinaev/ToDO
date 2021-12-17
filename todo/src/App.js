@@ -8,6 +8,7 @@ import Input from "./input/Input";
 import Paginate from "./pagination/Pagination";
 import axios from "axios";
 import { AuthContext } from "./context/auth.context";
+import { useNavigate } from "react-router-dom";
 import Exit from "./mainInterface/LogOut";
 const API_GET_TODOS = "http://localhost:3505/api/todos";
 const App = () => {
@@ -17,6 +18,8 @@ const App = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [numbersOfTodos, setNumbersOfTodos] = useState();
     const { token } = useContext(AuthContext);
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
     const todosPerPage = 5;
     useEffect(() => {
         if (token) { getTodos(); }
@@ -67,7 +70,7 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            const resault = await axios(API_GET_TODOS + `/${todo.id}`, {
+            await axios(API_GET_TODOS + `/${todo.id}`, {
                 method: "PATCH",
                 data: {
                     name: todo.name,
@@ -84,9 +87,37 @@ const App = () => {
         }
     };
 
+    const editItem = async (e, currentTitle, todo, setShowInput, setCurrentTitle) => {
+        try {
+            if (e.keyCode === 13) {
+                await axios(API_GET_TODOS + `/${todo.id}`, {
+                    method: "PATCH",
+                    data: {
+                        name: currentTitle,
+                        done: todo.done !== "undone" ? "done" : "undone",
+                    },
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                });
+                e.target.blur();
+                setShowInput(false);
+            }
+            if (e.keyCode === 27) {
+                e.target.blur();
+                setCurrentTitle(todo.name);
+                setShowInput(false);
+            }
+            getTodos();
+        } catch (err) {
+            console.log(err);
+            alert(err);
+        }
+    };
+
     const removeItem = async (uuid) => {
         try {
-            const resault = await axios(API_GET_TODOS + `/${uuid}`, {
+            await axios(API_GET_TODOS + `/${uuid}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + token
@@ -102,6 +133,15 @@ const App = () => {
         }
     };
 
+    const Escape = async () => {
+        try {
+            auth.logout();
+            navigate("/auth", { replace: true });
+        } catch (e) {
+            console.log(e);
+            alert(e);
+        }
+    }
 
     const IndexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = IndexOfLastTodo - todosPerPage;
@@ -118,16 +158,18 @@ const App = () => {
             <div className="mainInterface">
                 <FilterStatus setFilter={setFilter} />
                 <SortDate filtered={filtered} setFiltered={setFiltered} />
+                <Exit Escape={Escape} />
             </div>
             <div className="todoList">
                 {filtered ?
                     (<TodoList
                         filtered={filtered}
                         removeItem={removeItem}
-                        changeStatus={changeStatus}
+                        editItem={editItem}
                         IndexOfLastTodo={IndexOfLastTodo}
                         indexOfFirstTodo={indexOfFirstTodo}
                         getTodos={getTodos}
+                        changeStatus={changeStatus}
                     />)
                     : void (0)}
             </div>
@@ -138,7 +180,7 @@ const App = () => {
                 getTodos={getTodos}
                 currentPage={currentPage}
             />
-            <Exit />
+
         </div>
     );
 };

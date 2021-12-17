@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ filtered, removeItem, changeStatus, IndexOfLastTodo, indexOfFirstTodo, editItem, getTodos }) => {
+const TodoList = ({ filtered, removeItem, editItem, changeStatus }) => {
     return (
         <div className="todoList">
             {filtered.map((todo) => (
@@ -9,11 +9,8 @@ const TodoList = ({ filtered, removeItem, changeStatus, IndexOfLastTodo, indexOf
                     <TodoItem
                         removeItem={removeItem}
                         todo={todo}
-                        changeStatus={changeStatus}
-                        IndexOfLastTodo={IndexOfLastTodo}
-                        indexOfFirstTodo={indexOfFirstTodo}
                         editItem={editItem}
-                        getTodos={getTodos}
+                        changeStatus={changeStatus}
                     />
                 </div>
             ))}

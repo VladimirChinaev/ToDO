@@ -1,41 +1,11 @@
 import "../css/style.css";
-import axios from "axios";
-import { useState, useContext } from "react";
-import { AuthContext } from "../context/auth.context";
-const API_GET_TODOS = "http://localhost:3505/api/todos";
+import { useState } from "react";
 
 
-const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
+const TodoItem = ({ todo, removeItem, editItem, changeStatus }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);
     const [showInput, setShowInput] = useState(false);
-    const { token } = useContext(AuthContext);
-    const editItem = async (e, currentTitle, todo) => {
-        try {
-            if (e.keyCode === 13) {
-                await axios(API_GET_TODOS + `/${todo.id}`, {
-                    method: "PATCH",
-                    data: {
-                        name: currentTitle,
-                        done: todo.done !== "done" ? "done" : "undone",
-                    },
-                    headers: {
-                        Authorization: "Bearer " + token
-                    }
-                });
-                e.target.blur();
-                setShowInput(false);
-            }
-            if (e.keyCode === 27) {
-                e.target.blur();
-                setCurrentTitle(todo.name);
-                setShowInput(false);
-            }
-            getTodos();
-        } catch (err) {
-            console.log(err);
-            alert(err);
-        }
-    };
+
     return (
         <div key={todo.uuid}>
             <div className="todoElement">
@@ -43,7 +13,7 @@ const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
                     <input
                         type="checkbox"
                         className="buttonComplete"
-                        onClick={() => {
+                        onClick={(e) => {
                             changeStatus(todo);
                         }}
                     />
@@ -55,7 +25,7 @@ const TodoItem = ({ todo, removeItem, changeStatus, getTodos, }) => {
                         <input
                             value={currentTitle}
                             onKeyDown={(e) =>
-                                editItem(e, currentTitle, todo)
+                                editItem(e, currentTitle, todo, setShowInput, setCurrentTitle)
                             }
                             className="sideInput"
                             onChange={(e) => setCurrentTitle(e.target.value)}
