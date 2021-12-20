@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useHttp } from "../hooks/http.hook";
 import { useNavigate } from "react-router-dom";
+import { authPage, appPage, API_GET_TODOS, REGISTER, LOGIN } from "./EndPoints";
 
 
 export const AuthPage = () => {
@@ -13,14 +14,14 @@ export const AuthPage = () => {
     })
 
     const changeHandler = event => {
-        setForm({ ...form, [event.target.name]: event.target.value })
+        setForm({ ...form, [event.target.name]: event.target.value });
     }
 
     const registerHandler = async () => {
         try {
-            const data = await request("api/register", "POST", form);
-            navigate("/auth", { replace: true });
-            alert("user was created!")
+            await request(API_GET_TODOS + REGISTER, "POST", form);
+            alert("user was created!");
+            navigate(authPage, { replace: true });
         } catch (e) {
             console.log(e);
             alert(e);
@@ -29,12 +30,13 @@ export const AuthPage = () => {
 
     const loginHandler = async () => {
         try {
-            const data = await request('/api/login', 'POST', { ...form })
+            const data = await request(API_GET_TODOS + LOGIN, "POST", { ...form })
             auth.login(data.data.token, data.data.userId);
-            navigate("/app", { replace: true });
+            navigate(appPage, { replace: true });
         } catch (e) {
             console.log(e);
             alert(e);
+            console.log("NO!");
         }
     }
 

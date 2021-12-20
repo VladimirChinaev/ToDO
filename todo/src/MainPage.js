@@ -8,7 +8,8 @@ import { useRoutes } from "./pages/Routes";
 const MainPage = () => {
     const { login, logout, token, userId } = useAuth();
     const isAuthenticated = !!token;
-    const routes = useRoutes(false);
+    console.log("Here:", isAuthenticated);
+    const routes = useRoutes(isAuthenticated);
     return (
         <AuthContext.Provider value={{
             login, logout, token, userId, isAuthenticated

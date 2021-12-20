@@ -10,7 +10,8 @@ import axios from "axios";
 import { AuthContext } from "./context/auth.context";
 import { useNavigate } from "react-router-dom";
 import Exit from "./mainInterface/LogOut";
-const API_GET_TODOS = "http://localhost:3505/api/todos";
+import { authPage } from "./pages/EndPoints"
+import { API_GET_TODOS, GET_TASK, GET_POST, GET_DELETE, GET_PATCH } from "./pages/EndPoints";
 const App = () => {
     const [text, setText] = useState("");
     const [filter, setFilter] = useState("");
@@ -23,14 +24,13 @@ const App = () => {
     const todosPerPage = 5;
     useEffect(() => {
         if (token) { getTodos(); }
-
     }, [filter, currentPage, token]);
 
     const getTodos = async () => {
         const filterForQuery = filter && `filterBy=${filter}`;
         try {
             const href =
-                API_GET_TODOS + `?${filterForQuery}&page=${currentPage}&order=asc`;
+                API_GET_TODOS + GET_TASK + `?${filterForQuery}&page=${currentPage}&order=asc`;
             const result = await axios({
                 method: "GET",
                 url: href,
@@ -38,11 +38,13 @@ const App = () => {
                     Authorization: "Bearer " + token
                 }
             });
-            setFiltered(result.data.data.rows);
+            console.log(result.data);
+            setFiltered(result.data.info);
             setNumbersOfTodos(result.data.data.count);
         } catch (err) {
             console.log('getTodos err token', token);
             console.log('getTodos err response', err.response);
+            console.log(err);
         }
     };
 
@@ -50,7 +52,7 @@ const App = () => {
     const handleCreateTodos = async (e, name) => {
         try {
             e.preventDefault();
-            await axios(API_GET_TODOS, {
+            await axios(API_GET_TODOS + GET_POST, {
                 method: "POST",
                 data: {
                     name: name,
@@ -70,7 +72,7 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            await axios(API_GET_TODOS + `/${todo.id}`, {
+            await axios(API_GET_TODOS + GET_PATCH + `/${todo.id}`, {
                 method: "PATCH",
                 data: {
                     name: todo.name,
@@ -90,7 +92,7 @@ const App = () => {
     const editItem = async (e, currentTitle, todo, setShowInput, setCurrentTitle) => {
         try {
             if (e.keyCode === 13) {
-                await axios(API_GET_TODOS + `/${todo.id}`, {
+                await axios(API_GET_TODOS + GET_PATCH + `/${todo.id}`, {
                     method: "PATCH",
                     data: {
                         name: currentTitle,
@@ -117,7 +119,7 @@ const App = () => {
 
     const removeItem = async (uuid) => {
         try {
-            await axios(API_GET_TODOS + `/${uuid}`, {
+            await axios(API_GET_TODOS + GET_DELETE + `/${uuid}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + token
@@ -136,7 +138,8 @@ const App = () => {
     const Escape = async () => {
         try {
             auth.logout();
-            navigate("/auth", { replace: true });
+            console.log(authPage);
+            navigate(authPage, { replace: true });
         } catch (e) {
             console.log(e);
             alert(e);

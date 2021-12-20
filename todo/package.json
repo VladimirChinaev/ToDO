@@ -33,7 +33,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:3505",
+  "proxy": "https://back-end-api-1.herokuapp.com/api/todos",
   "browserslist": {
     "production": [
       ">0.2%",

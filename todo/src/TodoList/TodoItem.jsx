@@ -35,7 +35,7 @@ const TodoItem = ({ todo, removeItem, editItem, changeStatus }) => {
                 </div>
                 <div className="inElement">
                     <div>
-                        {todo.createdAt.slice(0, 10) + ' ' + todo.createdAt.slice(11, -5)}
+                        {todo.createdAtt.slice(0, 10) + ' ' + todo.updatedAtt.slice(11, -5)}
                     </div>
                     <input
                         type="button"
