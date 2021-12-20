@@ -2,10 +2,11 @@ import React from "react";
 import TodoItem from "./TodoItem";
 
 const TodoList = ({ filtered, removeItem, editItem, changeStatus }) => {
+    console.log("Here:", filtered);
     return (
         <div className="todoList">
             {filtered.map((todo) => (
-                <div key={todo.id}>
+                <div key={todo.uuid}>
                     <TodoItem
                         removeItem={removeItem}
                         todo={todo}

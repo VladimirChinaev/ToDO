@@ -2,6 +2,7 @@ import React from 'react';
 
 const FilterStatus = ({ setFilter }) => {
     const todoFilter = (todo) => {
+        console.log("------------------------->", todo);
         setFilter(todo);
     }
     return (

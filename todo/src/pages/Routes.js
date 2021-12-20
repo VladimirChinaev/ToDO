@@ -5,7 +5,6 @@ import App from "../App";
 import { authPage, appPage } from "./EndPoints"
 
 export const useRoutes = isAuthenticated => {
-    console.log("And Here:", isAuthenticated);
     if (isAuthenticated) {
         return (
             <Routes>

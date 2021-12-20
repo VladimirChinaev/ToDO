@@ -25,13 +25,13 @@ const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos }) =>
                 {numbersOfTodos > 0 ?
                     <div className="inSelect">
                         <button onClick={() => { pag(1) }} className="selectArrow">❮</button>
-                        {pageNumbers.map((number => (
-                            <div key={number} select>
+                        {pageNumbers.map((number, index) => (
+                            <div key={index} select>
                                 <button onClick={() => pag(number)} href="!#" className="select">
                                     {number}
                                 </button>
                             </div>
-                        )))}
+                        ))}
                         <button onClick={() => { pag(Math.ceil(numbersOfTodos / todosPerPage)) }} className="selectArrow">❯</button>
                     </div>
                     : ""}

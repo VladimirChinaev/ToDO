@@ -40,6 +40,7 @@ const App = () => {
             });
             console.log(result.data);
             setFiltered(result.data.info);
+            console.log(filtered);
             setNumbersOfTodos(result.data.count);
         } catch (err) {
             console.log('getTodos err token', token);
@@ -71,7 +72,6 @@ const App = () => {
     };
 
     const changeStatus = async (todo) => {
-        console.log(todo.uuid);
         try {
             await axios(API_GET_TODOS + GET_PATCH + `/${todo.uuid}`, {
                 method: "PATCH",
@@ -91,7 +91,6 @@ const App = () => {
     };
 
     const editItem = async (e, currentTitle, todo, setShowInput, setCurrentTitle) => {
-        console.log(todo.uuid);
         try {
             if (e.keyCode === 13) {
                 await axios(API_GET_TODOS + GET_PATCH + `/${todo.uuid}`, {
