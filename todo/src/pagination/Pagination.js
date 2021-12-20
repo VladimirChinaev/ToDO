@@ -6,35 +6,32 @@ const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos }) =>
         pageNumbers.push(i);
     }
 
-    const pag = (number) => {
-        setCurrentPage(number);
-        pagination();
-    }
-    const pagination = async () => {
+    const pagination = async (number) => {
         try {
+            setCurrentPage(number);
             getTodos();
         }
         catch (err) {
-            console.log(err);
             alert(err);
         }
     }
+
     return (
         <div>
             <div className="mainSelect">
                 {numbersOfTodos > 0 ?
                     <div className="inSelect">
-                        <button onClick={() => { pag(1) }} className="selectArrow">❮</button>
+                        <button onClick={() => { pagination(1) }} className="selectArrow">❮</button>
                         {pageNumbers.map((number, index) => (
                             <div key={index} select>
-                                <button onClick={() => pag(number)} href="!#" className="select">
+                                <button onClick={() => pagination(number)} href="!#" className="select">
                                     {number}
                                 </button>
                             </div>
                         ))}
-                        <button onClick={() => { pag(Math.ceil(numbersOfTodos / todosPerPage)) }} className="selectArrow">❯</button>
+                        <button onClick={() => { pagination(Math.ceil(numbersOfTodos / todosPerPage)) }} className="selectArrow">❯</button>
                     </div>
-                    : ""}
+                    : "🚧🚧🚧🚧🚧🚧"}
             </div>
         </div>
     )

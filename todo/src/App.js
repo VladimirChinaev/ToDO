@@ -38,14 +38,10 @@ const App = () => {
                     Authorization: "Bearer " + token
                 }
             });
-            console.log(result.data);
             setFiltered(result.data.info);
-            console.log(filtered);
             setNumbersOfTodos(result.data.count);
         } catch (err) {
-            console.log('getTodos err token', token);
-            console.log('getTodos err response', err.response);
-            console.log(err);
+            alert(err);
         }
     };
 
@@ -66,7 +62,6 @@ const App = () => {
             getTodos();
             setText("");
         } catch (err) {
-            console.log(err);
             alert(err);
         }
     };
@@ -85,7 +80,6 @@ const App = () => {
             });
             getTodos();
         } catch (err) {
-            console.log(err);
             alert(err);
         }
     };
@@ -113,14 +107,12 @@ const App = () => {
             }
             getTodos();
         } catch (err) {
-            console.log(err);
             alert(err);
         }
     };
 
     const removeItem = async (uuid) => {
         try {
-            console.log(uuid);
             await axios(API_GET_TODOS + GET_DELETE + `/${uuid}`, {
                 method: "DELETE",
                 headers: {
@@ -132,7 +124,6 @@ const App = () => {
                 setCurrentPage(currentPage - 1);
             }
         } catch (err) {
-            console.log(err);
             alert(err);
         }
     };
@@ -140,10 +131,8 @@ const App = () => {
     const Escape = async () => {
         try {
             auth.logout();
-            console.log(authPage);
             navigate(authPage, { replace: true });
         } catch (e) {
-            console.log(e);
             alert(e);
         }
     }
@@ -183,7 +172,6 @@ const App = () => {
                 numbersOfTodos={numbersOfTodos}
                 setCurrentPage={setCurrentPage}
                 getTodos={getTodos}
-                currentPage={currentPage}
             />
 
         </div>

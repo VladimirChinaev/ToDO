@@ -23,7 +23,6 @@ export const AuthPage = () => {
             alert("user was created!");
             navigate(authPage, { replace: true });
         } catch (e) {
-            console.log(e);
             alert(e);
         }
     }
@@ -34,9 +33,7 @@ export const AuthPage = () => {
             auth.login(data.data.token, data.data.userId);
             navigate(appPage, { replace: true });
         } catch (e) {
-            console.log(e);
             alert(e);
-            console.log("NO!");
         }
     }
 
