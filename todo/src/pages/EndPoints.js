@@ -11,7 +11,7 @@ export const authPage = prefix + "/auth";
 export const GET_TASK = "/todos";
 export const GET_POST = "/todos";
 export const GET_DELETE = "/todos";
-export const GET_PATCH = "/todos/:uuid";
+export const GET_PATCH = "/todos";
 
 
 //register and auth

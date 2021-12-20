@@ -71,8 +71,9 @@ const App = () => {
     };
 
     const changeStatus = async (todo) => {
+        console.log(todo.uuid);
         try {
-            await axios(API_GET_TODOS + GET_PATCH + `/${todo.id}`, {
+            await axios(API_GET_TODOS + GET_PATCH + `/${todo.uuid}`, {
                 method: "PATCH",
                 data: {
                     name: todo.name,
@@ -90,9 +91,10 @@ const App = () => {
     };
 
     const editItem = async (e, currentTitle, todo, setShowInput, setCurrentTitle) => {
+        console.log(todo.uuid);
         try {
             if (e.keyCode === 13) {
-                await axios(API_GET_TODOS + GET_PATCH + `/${todo.id}`, {
+                await axios(API_GET_TODOS + GET_PATCH + `/${todo.uuid}`, {
                     method: "PATCH",
                     data: {
                         name: currentTitle,
