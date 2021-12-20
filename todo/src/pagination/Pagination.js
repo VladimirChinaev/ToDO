@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos, currentPage }) => {
+const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos }) => {
     const pageNumbers = [];
     for (let i = 1; i <= (Math.ceil(numbersOfTodos / todosPerPage)); i++) {
         pageNumbers.push(i);
@@ -10,7 +10,7 @@ const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos, curr
         setCurrentPage(number);
         pagination();
     }
-    const pagination = async (req) => {
+    const pagination = async () => {
         try {
             getTodos();
         }

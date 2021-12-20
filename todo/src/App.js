@@ -40,7 +40,7 @@ const App = () => {
             });
             console.log(result.data);
             setFiltered(result.data.info);
-            setNumbersOfTodos(result.data.data.count);
+            setNumbersOfTodos(result.data.count);
         } catch (err) {
             console.log('getTodos err token', token);
             console.log('getTodos err response', err.response);
@@ -119,6 +119,7 @@ const App = () => {
 
     const removeItem = async (uuid) => {
         try {
+            console.log(uuid);
             await axios(API_GET_TODOS + GET_DELETE + `/${uuid}`, {
                 method: "DELETE",
                 headers: {

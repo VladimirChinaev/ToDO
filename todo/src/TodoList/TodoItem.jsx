@@ -42,7 +42,7 @@ const TodoItem = ({ todo, removeItem, editItem, changeStatus }) => {
                         value="🗑"
                         className="buttonDelete"
                         onClick={() => {
-                            removeItem(todo.id);
+                            removeItem(todo.uuid);
                         }}
                     />
                 </div>
