@@ -38,7 +38,7 @@ const App = () => {
                     Authorization: "Bearer " + token
                 }
             });
-            setFiltered(result.data.info);
+            setFiltered(result.data.data.rows);
             setNumbersOfTodos(result.data.count);
         } catch (err) {
             alert(err);
@@ -68,7 +68,7 @@ const App = () => {
 
     const changeStatus = async (todo) => {
         try {
-            await axios(API_GET_TODOS + GET_PATCH + `/${todo.uuid}`, {
+            await axios(API_GET_TODOS + GET_PATCH + `/${todo.id}`, {
                 method: "PATCH",
                 data: {
                     name: todo.name,
@@ -87,7 +87,7 @@ const App = () => {
     const editItem = async (e, currentTitle, todo, setShowInput, setCurrentTitle) => {
         try {
             if (e.keyCode === 13) {
-                await axios(API_GET_TODOS + GET_PATCH + `/${todo.uuid}`, {
+                await axios(API_GET_TODOS + GET_PATCH + `/${todo.id}`, {
                     method: "PATCH",
                     data: {
                         name: currentTitle,
@@ -111,9 +111,9 @@ const App = () => {
         }
     };
 
-    const removeItem = async (uuid) => {
+    const removeItem = async (id) => {
         try {
-            await axios(API_GET_TODOS + GET_DELETE + `/${uuid}`, {
+            await axios(API_GET_TODOS + GET_DELETE + `/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + token
@@ -164,6 +164,7 @@ const App = () => {
                         indexOfFirstTodo={indexOfFirstTodo}
                         getTodos={getTodos}
                         changeStatus={changeStatus}
+                        setFiltered={setFiltered}
                     />)
                     : void (0)}
             </div>

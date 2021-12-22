@@ -31,7 +31,7 @@ const Paginate = ({ todosPerPage, numbersOfTodos, setCurrentPage, getTodos }) =>
                         ))}
                         <button onClick={() => { pagination(Math.ceil(numbersOfTodos / todosPerPage)) }} className="selectArrow">❯</button>
                     </div>
-                    : "🚧🚧🚧🚧🚧🚧"}
+                    : ""}
             </div>
         </div>
     )

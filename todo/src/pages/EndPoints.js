@@ -1,6 +1,6 @@
 const prefix = "/ToDO";
 // server
-export const API_GET_TODOS = "https://back-end-api-1.herokuapp.com/api";
+export const API_GET_TODOS = "http://localhost:3505/api";
 
 //pages
 export const indexPage = prefix + "/";
@@ -12,6 +12,7 @@ export const GET_TASK = "/todos";
 export const GET_POST = "/todos";
 export const GET_DELETE = "/todos";
 export const GET_PATCH = "/todos";
+export const ROUTE_SWAP = "/todos";
 
 
 //register and auth

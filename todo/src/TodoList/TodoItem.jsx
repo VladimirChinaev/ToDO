@@ -1,13 +1,10 @@
 import "../css/style.css";
 import { useState } from "react";
-
-
 const TodoItem = ({ todo, removeItem, editItem, changeStatus }) => {
     const [currentTitle, setCurrentTitle] = useState(todo.name);
     const [showInput, setShowInput] = useState(false);
-
     return (
-        <div key={todo.uuid}>
+        <div key={todo.id}>
             <div className="todoElement">
                 <div className="inElement">
                     <input
@@ -35,20 +32,19 @@ const TodoItem = ({ todo, removeItem, editItem, changeStatus }) => {
                 </div>
                 <div className="inElement">
                     <div>
-                        {todo.createdAtt.slice(0, 10) + ' ' + todo.updatedAtt.slice(11, -5)}
+                        {todo.createdAt.slice(0, 10) + ' ' + todo.updatedAt.slice(11, -5)}
                     </div>
                     <input
                         type="button"
                         value="🗑"
                         className="buttonDelete"
                         onClick={() => {
-                            removeItem(todo.uuid);
+                            removeItem(todo.id);
                         }}
                     />
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
-
 export default TodoItem;
