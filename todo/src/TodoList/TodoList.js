@@ -10,7 +10,6 @@ const TodoList = ({ filtered, removeItem, editItem, changeStatus, setFiltered })
     }
 
     const dragEndHandler = (todo) => {
-        console.log("dragEnd:", todo);
     }
 
     const dragOverHandler = (e) => {
